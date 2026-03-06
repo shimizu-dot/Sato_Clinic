@@ -156,7 +156,7 @@
       top: 0;
       z-index: 50;
       background: var(--bg-green);
-      border-bottom: 1px solid #cfcfcf;
+      border-bottom: 2px solid var(--navy);
     }
 
     .site-header .container {
@@ -225,6 +225,8 @@
     .hero {
       position: relative;
       min-height: 0;
+      margin-top: 2px;
+      margin-bottom: 6px;
       background: var(--bg-cream);
       overflow: visible;
     }
@@ -285,9 +287,10 @@
 
     .hero h1 {
       margin: 0;
-      font-size: 3.2rem;
+      font-size: 64px;
       line-height: 1.15;
       letter-spacing: .03em;
+      text-shadow: 0 4px 4px rgba(0, 0, 0, .5);
     }
 
     .hero .tagline {
@@ -298,9 +301,13 @@
 
     .hero .lead {
       margin: 0 0 1.2rem;
-      font-size: 1rem;
+      font-size: 18px;
       max-width: 34rem;
       color: var(--navy);
+    }
+    .hero .lead--heading {
+      font-size: 20px;
+      font-weight: 700;
     }
     .hero .lead--mid {
       margin-top: 10.5rem;
@@ -378,7 +385,7 @@
 
     /* sections */
     main {
-      background: var(--bg-dark-gray)
+      background: var(--navy)
     }
 
     section {
@@ -395,6 +402,9 @@
 
     /* hours section */
     .hours-section {
+      width: 100%;
+      height: 670px;
+      margin-inline: 0;
       background: var(--bg-cream);
       border-top: 1px solid #cfcfcf;
       border-bottom: 1px solid #cfcfcf;
@@ -408,22 +418,22 @@
       text-align: center;
       font-weight: 700;
       color: var(--navy);
-      font-size: 1.2rem;
+      font-size: 28px;
       margin: 26px 0 22px;
     }
 
     .hours-card {
       width: min(980px, 100%);
       margin: 0 auto;
-      border: 2px solid #000;
-      border-radius: 12px;
-      background: var(--white);
+      border: none;
+      border-radius: 0;
+      background: var(--bg-cream);
       padding: 18px;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 16px;
       align-items: center;
-      box-shadow: var(--shadow);
+      box-shadow: none;
     }
 
     .hours-meta {
@@ -439,6 +449,13 @@
       margin: 8px 0 0;
       font-size: .9rem;
       color: #EB1519;
+    }
+    .hours-board {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0;
+      border: none;
     }
 
     /* news section */
@@ -508,6 +525,9 @@
 
     /* director message */
     .message-section {
+      width: min(1440px, 100%);
+      height: 833px;
+      margin-inline: auto;
       padding: 46px 0 62px;
       background: var(--white);
       border-bottom: 1px solid #e8e8e8;
@@ -946,7 +966,7 @@
           <p class="tagline">「地域に根ざした医療」をモットーに</p>
 
           <!-- ※本文は仕様書の文面を流用（改変なし） -->
-          <p class="lead lead--mid">患者様とともに歩む未来</p>
+          <h3 class="lead lead--mid lead--heading">患者様とともに歩む未来</h3>
           <p class="lead lead--indented">
             佐藤医院では、患者様の健康を第一に考え、今後も安心・安全な医療を提供し続けます。どんな小さな悩みでも、お気軽にご相談ください。私たちがしっかりとサポートさせていただきます。地域の皆様とともに、より健康で豊かな生活を築いていきたいと考えています。<br><br>
             佐藤医院のスタッフ一同、皆様のご来院を心よりお待ちしております。
@@ -954,7 +974,49 @@
 
           <div class="quick-hours" aria-label="診療時間（クイック表示）">
             <div class="quick-hours-inner">
-              <img src="img/mixBoard.png" alt="診療時間のご案内">
+              <div>
+                <table class="hours-table" aria-label="診療時間表">
+                  <thead>
+                    <tr>
+                      <th scope="col">診療時間</th>
+                      <th scope="col">月</th>
+                      <th scope="col">火</th>
+                      <th scope="col">水</th>
+                      <th scope="col">木</th>
+                      <th scope="col">金</th>
+                      <th scope="col">土</th>
+                      <th scope="col">日</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>9時〜12時</td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot dot--off" aria-label="休診"></span></td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot dot--off" aria-label="休診"></span></td>
+                    </tr>
+                    <tr>
+                      <td>14時〜19時</td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot dot--off" aria-label="休診"></span></td>
+                      <td><span class="dot" aria-label="診療あり"></span></td>
+                      <td><span class="dot dot--off" aria-label="休診"></span></td>
+                      <td><span class="dot dot--off" aria-label="休診"></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="note">
+                  受付時間：8時〜11時 / 13〜18時<br>
+                  休診日：木曜・土曜午後・日曜<br>
+                  ※祝祭日も診察を行っておりますが、休診日もございますので、事前にご確認ください。
+                </p>
+              </div>
 
               <a class="btn" href="#" aria-label="Web予約へ">Web予約</a>
             </div>
@@ -972,52 +1034,10 @@
       <h1 class="section-titlebar">診療時間</h1>
 
       <div class="container section-body">
-        <p class="hours-sub">患者様中心の医療を提供</p>
+        <h2 class="hours-sub">患者様中心の医療を提供</h2>
 
         <div class="hours-card" role="group" aria-label="診療時間（詳細）">
-          <table class="hours-table" aria-label="診療時間表（詳細）">
-            <thead>
-              <tr>
-                <th scope="col">診療時間</th>
-                <th scope="col">月</th>
-                <th scope="col">火</th>
-                <th scope="col">水</th>
-                <th scope="col">木</th>
-                <th scope="col">金</th>
-                <th scope="col">土</th>
-                <th scope="col">日</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>9時〜12時</td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot dot--off" aria-label="休診"></span></td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot dot--off" aria-label="休診"></span></td>
-              </tr>
-              <tr>
-                <td>14時〜19時</td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot dot--off" aria-label="休診"></span></td>
-                <td><span class="dot" aria-label="診療あり"></span></td>
-                <td><span class="dot dot--off" aria-label="休診"></span></td>
-                <td><span class="dot dot--off" aria-label="休診"></span></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="hours-meta">
-            <strong>受付時間：</strong>8時〜11時 / 13〜18時<br>
-            <strong>休診日：</strong>木曜・土曜午後・日曜<br>
-            <a class="btn btn--outline" href="#" aria-label="Web予約へ">Web予約</a>
-          </div>
-          <p class="hours-note">※祝祭日も診察を行っておりますが、休診日もございますので、事前にご確認ください。</p>
+          <img class="hours-board" src="img/openingBoard.jpg" alt="診療時間のご案内">
         </div>
       </div>
     </section>
