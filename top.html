@@ -224,15 +224,14 @@
     /* hero (wireframe: left gray panel with diagonal edge, right photo with low opacity) */
     .hero {
       position: relative;
-      min-height: 820px;
+      min-height: 0;
       background: var(--bg-cream);
-      overflow: hidden;
+      overflow: visible;
     }
 
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url("img/Hospital_Exterior/hospital_image.jpg") center / cover no-repeat;
+      position: relative;
+      height: 950px;
     }
 
     .hero-bg::after {
@@ -240,14 +239,20 @@
     }
 
     .hero-grid {
-      position: relative;
-      min-height: 820px;
+      position: absolute;
+      inset: 0;
+      min-height: 950px;
+      height: 950px;
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns: 800px 1fr;
     }
 
     .hero-left {
       position: relative;
+      z-index: 1;
+      width: 800px;
+      min-height: 950px;
+      height: 950px;
       background: #F2EBF7;
       padding: 64px 48px 210px 48px;
       clip-path: polygon(0 0, 78% 0, 92% 100%, 0 100%);
@@ -256,7 +261,10 @@
     }
 
     .hero-right {
-      position: relative;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      grid-column: 1 / -1;
       display: flex;
       align-items: stretch;
       justify-content: stretch;
@@ -271,7 +279,8 @@
       border-left: none;
       background: transparent;
       opacity: 1;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: right center;
     }
 
     .hero h1 {
@@ -293,9 +302,8 @@
       max-width: 34rem;
       color: var(--navy);
     }
-
-    .hero .lead--lower {
-      margin-top: 5em;
+    .hero .lead--mid {
+      margin-top: 10.5rem;
     }
 
     .hero .lead--indented {
@@ -707,22 +715,6 @@
       object-fit: cover;
     }
 
-    .staff-photo--yamamoto {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      object-position: left center;
-    }
-
-    .staff-photo--suzuki {
-      width: 190px;
-      height: 190px;
-      object-fit: cover;
-      object-position: calc(100% - 8px) center;
-      transform: scale(1.12);
-      transform-origin: center;
-    }
-
     .staff-name {
       margin: 0 0 8px;
       font-size: 1.4rem;
@@ -954,7 +946,7 @@
           <p class="tagline">「地域に根ざした医療」をモットーに</p>
 
           <!-- ※本文は仕様書の文面を流用（改変なし） -->
-          <p class="lead lead--lower">患者様とともに歩む未来</p>
+          <p class="lead lead--mid">患者様とともに歩む未来</p>
           <p class="lead lead--indented">
             佐藤医院では、患者様の健康を第一に考え、今後も安心・安全な医療を提供し続けます。どんな小さな悩みでも、お気軽にご相談ください。私たちがしっかりとサポートさせていただきます。地域の皆様とともに、より健康で豊かな生活を築いていきたいと考えています。<br><br>
             佐藤医院のスタッフ一同、皆様のご来院を心よりお待ちしております。
@@ -962,56 +954,16 @@
 
           <div class="quick-hours" aria-label="診療時間（クイック表示）">
             <div class="quick-hours-inner">
-              <div>
-                <table class="hours-table" aria-label="診療時間表">
-                  <thead>
-                    <tr>
-                      <th scope="col">診療時間</th>
-                      <th scope="col">月</th>
-                      <th scope="col">火</th>
-                      <th scope="col">水</th>
-                      <th scope="col">木</th>
-                      <th scope="col">金</th>
-                      <th scope="col">土</th>
-                      <th scope="col">日</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>9時〜12時</td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                    </tr>
-                    <tr>
-                      <td>14時〜19時</td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p class="note">
-                  受付時間：8時〜11時 / 13〜18時<br>
-                  休診日：木曜・土曜午後・日曜<br>
-                  ※祝祭日も診察を行っておりますが、休診日もございますので、事前にご確認ください。
-                </p>
-              </div>
+              <img src="img/mixBoard.png" alt="診療時間のご案内">
 
               <a class="btn" href="#" aria-label="Web予約へ">Web予約</a>
             </div>
           </div>
         </div>
 
-        <div class="hero-right" aria-hidden="true"></div>
+        <div class="hero-right">
+          <img class="photo" src="img/hospital Image.jpg" alt="病院外観">
+        </div>
       </div>
     </section>
 
@@ -1218,7 +1170,7 @@
           </article>
 
           <article class="staff-card">
-            <img class="staff-photo staff-photo--suzuki" src="img/Doctor_Image/suzuki_mari 1.png" alt="看護部長 鈴木 真理の写真">
+            <img class="staff-photo" src="img/Doctor_Image/suzuki_mari 1.png" alt="看護部長 鈴木 真理の写真">
             <div>
               <h3 class="staff-name">看護部長　鈴木 真理</h3>
               <p class="staff-desc">得意分野： 親身な対応、注射・採血技術、健康管理指導　安心して治療を受けていただけるよう、いつも笑顔でお待ちしています。些細なことでもお気軽にご相談ください。</p>
@@ -1236,7 +1188,7 @@
           </article>
 
           <article class="staff-card">
-            <img class="staff-photo staff-photo--yamamoto" src="img/doctor_Image/yamamoto_hana.jpg" alt="医療事務 山本 花の写真">
+            <img class="staff-photo" src="img/doctor_Image/yamamoto_hana.jpg" alt="医療事務 山本 花の写真">
             <div>
               <h3 class="staff-name">医療事務　山本 花</h3>
               <p class="staff-desc">得意分野： 受付業務、カルテ管理、医療費計算　皆様に気持ちよくご利用いただけるよう、笑顔と真心を大切にしております。初めての方もどうぞ安心してお越しください。</p>
