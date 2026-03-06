@@ -158,6 +158,7 @@
       background: var(--bg-green);
       border-bottom: 1px solid #cfcfcf;
     }
+
     .site-header .container {
       width: calc(100% - 20px);
       max-width: none;
@@ -231,7 +232,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url("img/Hospital_Exterior/hospital_1.jpg") center / cover no-repeat;
+      background: url("img/Hospital_Exterior/hospital_image.jpg") center / cover no-repeat;
     }
 
     .hero-bg::after {
@@ -573,6 +574,8 @@
       height: 170px;
       background: var(--bg-gray);
       border-bottom: 1px solid #dcdcdc;
+      width: 100%;
+      object-fit: cover;
     }
 
     .service-title {
@@ -918,19 +921,19 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="佐藤医院 トップ">
+      <a class="brand" href="top.html#top" aria-label="佐藤医院 トップ">
         <img class="brand-mark" src="img/Logo/logo.png" alt="佐藤医院ロゴ">
         <span class="sr-only">佐藤医院</span>
       </a>
 
       <nav class="header-nav" aria-label="グローバルナビゲーション">
-        <a class="header-link--gray" href="#about">当院について</a>
-        <a href="#news">お知らせ</a>
-        <a href="#services">診療内容</a>
-        <a href="#staff">スタッフ紹介</a>
-        <a href="#hours">診療時間</a>
-        <a href="#access">所在地</a>
-        <a href="#contact">お問合せ</a>
+        <a class="header-link--gray" href="top.html#about">当院について</a>
+        <a href="top.html#news">お知らせ</a>
+        <a href="top.html#services">診療内容</a>
+        <a href="top.html#staff">スタッフ紹介</a>
+        <a href="top.html#hours">診療時間</a>
+        <a href="top.html#access">所在地</a>
+        <a href="top.html#contact">お問合せ</a>
 
         <span class="header-actions">
           <a class="btn btn--gray" href="#" aria-label="Web予約">Web予約</a>
@@ -1122,7 +1125,7 @@
             </div>
           </div>
 
-          <img class="message-photo" src="img/doctor_Image/sato_taro.jpg" alt="院長 佐藤 太郎の写真">
+          <img class="message-photo" src="img/Doctor_Image/sato_taro 1.jpg" alt="院長 佐藤 太郎の写真">
         </div>
       </div>
     </section>
@@ -1138,7 +1141,7 @@
 
         <div class="services-grid" aria-label="診療内容（4項目）">
           <article class="service-card">
-            <div class="service-media" aria-hidden="true"></div>
+            <img class="service-media" src="img/Patient_Image/card1Img.png" alt="一般内科診療のイメージ">
             <h3 class="service-title">一般内科診療</h3>
             <p class="service-text">
               風邪や発熱、喉の痛み、頭痛、腹痛などの症状を中心に、一般的な体調不良の診療を行っています。また、原因不明の不調や軽い症状であっても、早期診断に努めております。
@@ -1146,7 +1149,7 @@
           </article>
 
           <article class="service-card">
-            <div class="service-media" aria-hidden="true"></div>
+            <img class="service-media" src="img/Patient_Image/card2Img.png" alt="生活習慣病の診断・治療のイメージ">
             <h3 class="service-title">生活習慣病の診断・治療</h3>
             <p class="service-text">
               高血圧症、糖尿病、脂質異常症（高コレステロール血症）、メタボリック症候群など、生活習慣病の診断と治療を行います。病気の進行を予防し、健康維持のための生活指導や薬物療法を行います。
@@ -1154,7 +1157,7 @@
           </article>
 
           <article class="service-card">
-            <div class="service-media" aria-hidden="true"></div>
+            <img class="service-media" src="img/Patient_Image/patient_4 1.png" alt="消化器系の診察のイメージ">
             <h3 class="service-title">消化器系の診察</h3>
             <p class="service-text">
               胃痛、胃もたれ、胸やけ、便秘、下痢などの消化器系の不調に対応しています。必要に応じて胃カメラや超音波検査などを実施し、胃腸の健康をサポートします。
@@ -1162,7 +1165,7 @@
           </article>
 
           <article class="service-card">
-            <div class="service-media" aria-hidden="true"></div>
+            <img class="service-media" src="img/Patient_Image/patient_6 1.png" alt="呼吸器系の診察のイメージ">
             <h3 class="service-title">呼吸器系の診察</h3>
             <p class="service-text">
               咳、息切れ、胸の痛みなど、呼吸器系の症状について診察を行っています。季節性の喘息やアレルギー性鼻炎、慢性閉塞性肺疾患（COPD）などにも対応し、適切な治療と予防をサポートします。
@@ -1186,7 +1189,7 @@
         </p>
 
         <div class="slider" aria-label="院内の様子（スライダー）">
-          <img id="about-slider-image" src="img/Hospital_Exterior/hospital_1.jpg" alt="院内の様子 1">
+          <img id="about-slider-image" src="img/Hospital_Exterior/hospital_4.jpg" alt="院内の様子 1">
           <div class="slider-controls" aria-label="スライダー操作">
             <a href="#" data-slider-action="prev" aria-label="前の画像">前へ</a>
             <a href="#" data-slider-action="next" aria-label="次の画像">次へ</a>
@@ -1206,7 +1209,7 @@
 
         <div class="staff-list" aria-label="スタッフ一覧">
           <article class="staff-card">
-            <img class="staff-photo" src="img/doctor_Image/sato_taro.jpg" alt="院長 佐藤 太郎の写真">
+            <img class="staff-photo" src="img/doctor_Image/sato_taro.png" alt="院長 佐藤 太郎の写真">
             <div>
               <h3 class="staff-name">院長　佐藤 太郎</h3>
               <p class="staff-desc">専門分野： 生活習慣病、呼吸器疾患、内科全般　患者様にとって気軽に相談できる「かかりつけ医」を目指しています。どんな小さな不安でも、まずはご相談ください。</p>
@@ -1215,7 +1218,7 @@
           </article>
 
           <article class="staff-card">
-            <img class="staff-photo staff-photo--suzuki" src="img/doctor_Image/suzuki_mari.jpg" alt="看護部長 鈴木 真理の写真">
+            <img class="staff-photo staff-photo--suzuki" src="img/Doctor_Image/suzuki_mari 1.png" alt="看護部長 鈴木 真理の写真">
             <div>
               <h3 class="staff-name">看護部長　鈴木 真理</h3>
               <p class="staff-desc">得意分野： 親身な対応、注射・採血技術、健康管理指導　安心して治療を受けていただけるよう、いつも笑顔でお待ちしています。些細なことでもお気軽にご相談ください。</p>
