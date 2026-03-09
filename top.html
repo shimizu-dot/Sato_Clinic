@@ -53,6 +53,30 @@
       text-decoration: none
     }
 
+    a,
+    button,
+    summary,
+    input[type="button"],
+    input[type="submit"] {
+      transition: filter .15s ease, opacity .15s ease;
+    }
+
+    a:hover,
+    button:hover,
+    summary:hover,
+    input[type="button"]:hover,
+    input[type="submit"]:hover {
+      filter: brightness(1.06);
+    }
+
+    a[href],
+    button,
+    summary,
+    input[type="button"],
+    input[type="submit"] {
+      cursor: pointer;
+    }
+
     img {
       max-width: 100%;
       height: auto;
@@ -122,7 +146,7 @@
     .section-titlebar {
       width: min(1440px, 100%);
       margin: 2px auto 0;
-      background: var(--navy);
+      background: linear-gradient(100deg, #102845 0%, #1f3a5f 46%, #2b5c93 100%);
       color: var(--white);
       height: 53px;
       padding: 0;
@@ -132,10 +156,13 @@
       font-size: 44px;
       font-weight: 700;
       letter-spacing: .04em;
+      border-top: 1px solid rgba(255, 255, 255, .2);
+      border-bottom: 1px solid rgba(0, 0, 0, .25);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), inset 0 -1px 0 rgba(0, 0, 0, .18);
     }
 
     .section-titlebar--navy {
-      background: var(--navy)
+      background: linear-gradient(100deg, #102845 0%, #1f3a5f 46%, #2b5c93 100%)
     }
 
     .placeholder {
@@ -192,7 +219,7 @@
     .brand-mark {
       width: 270px;
       height: 81px;
-      background: #fff;
+      background: var(--cream);
       object-fit: contain;
     }
 
@@ -229,6 +256,35 @@
       gap: 10px;
       margin-left: 8px;
       margin-right: 0;
+    }
+
+    .header-actions .btn {
+      border: 1px solid #0f1f36;
+      border-bottom: 3px solid #091325;
+      background: linear-gradient(180deg, #ffffff 0%, #dfe8f8 100%);
+      color: #000;
+      box-shadow: 0 4px 0 #091325, 0 8px 14px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .9);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .75);
+      transition: transform .08s ease, box-shadow .08s ease;
+    }
+
+    .header-actions .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 #091325, 0 10px 16px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .95);
+    }
+
+    .header-actions .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #091325, 0 4px 10px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .85);
+    }
+
+    .header-actions .btn--dark {
+      background: var(--black);
+      color: var(--white);
+      border-color: #222;
+      border-bottom-color: #111;
+      box-shadow: 0 4px 0 #111, 0 8px 14px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .12);
+      text-shadow: none;
     }
 
     /* hero (wireframe: left gray panel with diagonal edge, right photo with low opacity) */
@@ -665,6 +721,11 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 1px 6px rgba(0, 0, 0, .16);
     }
 
+    .news-more a[aria-disabled="true"] {
+      opacity: .65;
+      cursor: wait;
+    }
+
     /* director message */
     .message-section {
       width: min(1440px, 100%);
@@ -1073,6 +1134,56 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 1px 6px rgba(0, 0, 0, .16);
     }
 
+    .career-tooltip-btn {
+      position: absolute;
+    }
+
+    .career-tooltip-btn::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 10px);
+      width: max-content;
+      max-width: min(92vw, 560px);
+      white-space: normal;
+      word-break: break-word;
+      padding: 10px 12px;
+      color: #000;
+      background: #fff;
+      border-radius: 8px;
+      font-size: .95rem;
+      line-height: 1.5;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity .18s ease, transform .18s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .career-tooltip-btn::before {
+      content: "";
+      position: absolute;
+      right: 18px;
+      bottom: calc(100% + 2px);
+      border: 8px solid transparent;
+      border-top-color: var(--cream);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity .18s ease, transform .18s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .career-tooltip-btn.is-open::after,
+    .career-tooltip-btn.is-open::before {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
     /* access */
     .access-section {
       min-height: auto;
@@ -1150,7 +1261,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
-      align-items: start;
+      align-items: center;
     }
 
     .footer-brand {
@@ -1211,15 +1322,45 @@
     }
 
     .footer-banner {
-      height: 240px;
-      width: 520px;
+      width: 861px;
       max-width: 100%;
+      aspect-ratio: 861 / 213;
+      height: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 10px;
-      background: var(--green);
-      border: 1px solid rgba(255, 255, 255, .25);
+      background: var(--green) url('img/openingBoard.png') center / contain no-repeat;
       margin-top: 14px;
       margin-left: 0;
       margin-right: auto;
+    }
+
+    .footer-banner .btn {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      margin: 0;
+      border: 1px solid #0f1f36;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffffff 0%, #dfe8f8 100%);
+      color: #000;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 2px 8px rgba(0, 0, 0, .18);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+      transition: transform .08s ease, box-shadow .08s ease;
+      transform: translate(calc(-50% + 20rem - 2px), 74%);
+    }
+
+    .footer-banner .btn:hover {
+      transform: translate(calc(-50% + 20rem), calc(74% - 1px));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 3px 10px rgba(0, 0, 0, .2);
+    }
+
+    .footer-banner .btn:active {
+      transform: translate(calc(-50% + 20rem), calc(74% + 2px));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 1px 6px rgba(0, 0, 0, .16);
     }
 
     .footer-bottom {
@@ -1228,6 +1369,13 @@
       text-align: center;
       font-size: .85rem;
       padding: 10px 0;
+    }
+
+    .copyright-symbol {
+      font-size: 2em;
+      line-height: 1;
+      vertical-align: baseline;
+      color: #fff;
     }
 
     h1 {
@@ -1358,7 +1506,7 @@
         <a href="top.html#contact">お問合せ</a>
 
         <span class="header-actions">
-          <a class="btn btn--gray" href="#" aria-label="Web予約">Web予約</a>
+          <a class="btn btn--gray" href="dummy.html#reservation-section" aria-label="Web予約">Web予約</a>
           <a class="btn btn--dark" href="#" lang="en" aria-label="English">ENGLISH</a>
         </span>
       </nav>
@@ -1384,7 +1532,7 @@
 
           <div class="quick-hours" aria-label="診療時間（クイック表示）">
             <img class="quick-hours-board" src="img/openingBoard1.png" alt="診療時間のご案内">
-            <a class="btn" href="#" aria-label="Web予約へ">Web予約</a>
+            <a class="btn" href="dummy.html#reservation-section" aria-label="Web予約へ">Web予約</a>
           </div>
         </div>
 
@@ -1403,7 +1551,7 @@
 
         <div class="hours-card" role="group" aria-label="診療時間（詳細）">
           <img class="hours-board" src="img/openingBoard.jpg" alt="診療時間のご案内">
-          <a class="btn" href="#" aria-label="Web予約へ">Web予約</a>
+          <a class="btn" href="dummy.html#reservation-section" aria-label="Web予約へ">Web予約</a>
         </div>
       </div>
     </section>
@@ -1435,7 +1583,7 @@
 
       <div class="news-footer-bar" aria-hidden="true">
         <div class="news-more">
-          <a href="#" aria-label="お知らせ一覧へ">お知らせ一覧へ</a>
+          <a href="dummy.html#news-list-section" aria-label="お知らせ一覧へ">お知らせ一覧へ</a>
         </div>
       </div>
     </section>
@@ -1562,7 +1710,8 @@
               <h3 class="staff-desc">専門分野： 生活習慣病、呼吸器疾患、内科全般<br>患者様にとって気軽に相談できる「かかりつけ医」を目指しています。どんな小さな不安でも、まずはご相談ください。
               </h3>
             </div>
-            <a class="btn" href="#" aria-label="院長の経歴">経歴</a>
+            <a class="btn career-tooltip-btn js-career-tooltip" href="#" aria-label="院長の経歴"
+              data-tooltip="経歴： 光明大学医学部卒業後、瑞穂中央総合病院で内科医として10 年間勤務。">経歴</a>
           </article>
 
           <article class="staff-card">
@@ -1572,7 +1721,8 @@
               <h3 class="staff-desc">得意分野： 親身な対応、注射・採血技術、健康管理指導<br>安心して治療を受けていただけるよう、いつも笑顔でお待ちしています。些細なことでもお気軽にご相談ください。
               </h3>
             </div>
-            <a class="btn" href="#" aria-label="看護部長の経歴">経歴</a>
+            <a class="btn career-tooltip-btn js-career-tooltip" href="#" aria-label="看護部長の経歴"
+              data-tooltip="経歴： 白桜大学看護学部卒業後、緑が丘大学病院で10 年勤務。地域医療に携 わりたい思いから、佐藤内科医院に入職。">経歴</a>
           </article>
 
           <article class="staff-card">
@@ -1582,7 +1732,8 @@
               <h3 class="staff-desc">得意分野： 血液検査、心電図検査、超音波検査<br>検査は不安が伴うこともありますが、できるだけリラックスしていただけるよう、優しく丁寧な対応を心がけています。
               </h3>
             </div>
-            <a class="btn" href="#" aria-label="臨床検査技師の経歴">経歴</a>
+            <a class="btn career-tooltip-btn js-career-tooltip" href="#" aria-label="臨床検査技師の経歴"
+              data-tooltip="経歴： 東都臨床検査技術専門学校を卒業後、武蔵中央医療センターにて15 年 間の臨床検査技師としての経験を積む。">経歴</a>
           </article>
 
           <article class="staff-card">
@@ -1592,7 +1743,8 @@
               <h3 class="staff-desc">得意分野： 受付業務、カルテ管理、医療費計算<br>皆様に気持ちよくご利用いただけるよう、笑顔と真心を大切にしております。初めての方もどうぞ安心してお越しください。
               </h3>
             </div>
-            <a class="btn" href="#" aria-label="医療事務の経歴">経歴</a>
+            <a class="btn career-tooltip-btn js-career-tooltip" href="#" aria-label="医療事務の経歴"
+              data-tooltip="経歴： 希望医療カレッジ卒業後、さくら診療所にて受付業務を担当。現在は佐藤内科医院で患者様対応を担当。">経歴</a>
           </article>
         </div>
       </div>
@@ -1645,18 +1797,20 @@
               <a href="#services">診療内容</a>
               <a href="#staff">スタッフ紹介</a>
               <a href="#access">アクセス</a>
-              <a href="#" aria-label="FAQページへ">FAQ</a>
+              <a href="dummy.html#faq-section" aria-label="FAQページへ">FAQ</a>
             </nav>
           </div>
         </div>
       </div>
 
       <div>
-        <div class="footer-banner" aria-hidden="true"></div>
+        <div class="footer-banner">
+          <a class="btn" href="dummy.html#reservation-section" aria-label="Web予約へ">Web予約</a>
+        </div>
       </div>
     </div>
 
-    <div class="footer-bottom">©︎Sato Clinic</div>
+      <div class="footer-bottom"><span class="copyright-symbol">©︎</span> Sato Clinic</div>
   </footer>
 
   <script>
@@ -1684,6 +1838,147 @@
             index = index <= min ? max : index - 1;
           }
           updateImage();
+        });
+      });
+    })();
+
+    (function () {
+      const buttons = document.querySelectorAll('.js-career-tooltip');
+      if (buttons.length === 0) return;
+
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+          const isOpen = button.classList.contains('is-open');
+          buttons.forEach(function (other) {
+            other.classList.remove('is-open');
+          });
+          if (!isOpen) {
+            button.classList.add('is-open');
+          }
+        });
+      });
+
+      document.addEventListener('click', function (event) {
+        buttons.forEach(function (button) {
+          if (!button.contains(event.target)) {
+            button.classList.remove('is-open');
+          }
+        });
+      });
+    })();
+
+    (function () {
+      const newsList = document.querySelector('.news-list');
+      const trigger = document.querySelector('.news-more a[aria-label="お知らせ一覧へ"]');
+      if (!newsList || !trigger) return;
+
+      let isSliding = false;
+      let cycleNewsPromise;
+      let nextNewsIndex = 0;
+
+      function buildNewsListItem(data) {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        const time = document.createElement('time');
+        const title = document.createElement('span');
+
+        link.className = 'news-item';
+        link.href = data.href;
+        time.dateTime = '2025-01-01';
+        time.textContent = data.date;
+        title.textContent = data.title;
+
+        link.appendChild(time);
+        link.appendChild(title);
+        li.appendChild(link);
+        return li;
+      }
+
+      function toNewsData(link) {
+        const timeNode = link.querySelector('time');
+        const titleNode = link.querySelector('span');
+        return {
+          date: timeNode ? timeNode.textContent.trim() : 'YY/MM/DD',
+          title: titleNode ? titleNode.textContent.trim() : '',
+          href: link.getAttribute('href') || '#'
+        };
+      }
+
+      function getCycleNewsData() {
+        if (cycleNewsPromise) return cycleNewsPromise;
+
+        const currentTopItems = Array.from(newsList.querySelectorAll('li > a.news-item'))
+          .map(function (link) {
+            return toNewsData(link);
+          })
+          .filter(function (item) {
+            return item.title !== 'インフルエンザ予防接種について';
+          });
+
+        cycleNewsPromise = fetch('dummy.html', { cache: 'no-store' })
+          .then(function (response) {
+            if (!response.ok) throw new Error('failed to load dummy');
+            return response.text();
+          })
+          .then(function (html) {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const extras = Array.from(
+              doc.querySelectorAll('#news-list-section details[id^="news-"]')
+            )
+              .map(function (section) {
+                const head = section.querySelector('.news-head');
+                if (!head) return null;
+                const dateNode = head.querySelector('.news-date');
+                const dateText = dateNode ? dateNode.textContent.trim() : 'YY/MM/DD';
+                const titleText = head.textContent.replace(dateText, '').trim();
+                if (!/^お知らせ/.test(titleText)) return null;
+                return {
+                  date: dateText || 'YY/MM/DD',
+                  title: titleText,
+                  href: 'dummy.html#' + section.id
+                };
+              })
+              .filter(function (item) {
+                return Boolean(item);
+              });
+            if (extras.length === 0) throw new Error('extra news not found');
+            const cycle = currentTopItems.concat(extras);
+            nextNewsIndex = currentTopItems.length;
+            return cycle;
+          })
+          .catch(function () {
+            const fallbackExtras = [
+              { date: 'YY/MM/DD', title: 'お知らせ α', href: 'dummy.html#news-alpha' },
+              { date: 'YY/MM/DD', title: 'お知らせ β', href: 'dummy.html#news-beta' },
+              { date: 'YY/MM/DD', title: 'お知らせ γ', href: 'dummy.html#news-gamma' },
+              { date: 'YY/MM/DD', title: 'お知らせ ε', href: 'dummy.html#news-epsilon' }
+            ];
+            const cycle = currentTopItems.concat(fallbackExtras);
+            nextNewsIndex = currentTopItems.length;
+            return cycle;
+          });
+        return cycleNewsPromise;
+      }
+
+      trigger.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (isSliding) return;
+
+        const firstItem = newsList.querySelector('li');
+        if (!firstItem) return;
+
+        isSliding = true;
+        trigger.setAttribute('aria-disabled', 'true');
+
+        getCycleNewsData().then(function (newsItems) {
+          const nextData = newsItems[nextNewsIndex % newsItems.length];
+          nextNewsIndex += 1;
+          const nextItem = buildNewsListItem(nextData);
+          newsList.appendChild(nextItem);
+          firstItem.remove();
+          trigger.removeAttribute('aria-disabled');
+          isSliding = false;
         });
       });
     })();
