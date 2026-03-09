@@ -13,16 +13,18 @@
 
   <style>
     :root {
-      --bg-gray: #D9D9D9;
-      --bg-dark-gray: #A6A1A1;
-      --bg-cream: #FFF8F0;
-      --bg-backcolor: #D0E1FF;
-      --bg-green: #29847E;
-      --navy: #1B2158;
+      --navy: #1F3A5F;
+      --green: #29847E;
+      --cream: #FFF8F0;
+      --dcream: #EDE4D8;
+      --red: #D90C0C;
+      --dgray: #A6A1A1;
+      --gray: #D9D9D9;
+      --pink: #F2EBF7;
       --black: #000;
       --white: #fff;
       --text: #111;
-      --container: 1300px;
+      --container: 1440px;
       --shadow: 0 4px 10px rgba(0, 0, 0, .15);
       --radius: 14px;
     }
@@ -39,10 +41,11 @@
 
     body {
       margin: 0;
-      font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
       color: var(--text);
-      background: var(--bg-dark-gray);
+      background: var(--gray);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
@@ -82,7 +85,7 @@
       padding: .55rem .9rem;
       border-radius: 10px;
       border: 1px solid #999;
-      background: var(--bg-dark-gray);
+      background: var(--dgray);
       font-weight: 500;
       white-space: nowrap;
     }
@@ -99,7 +102,7 @@
     }
 
     .btn--gray {
-      background: var(--bg-gray);
+      background: var(--gray);
       color: #000;
       border-color: #999;
     }
@@ -108,20 +111,24 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: .35rem 1.2rem;
+      padding: .55rem 1.8rem;
       border-radius: 999px;
       border: 1px solid #bbb;
-      background: var(--bg-dark-gray);
+      background: var(--dgray);
+      font-size: 1.15rem;
       font-weight: 700;
     }
 
     .section-titlebar {
-      background: #1B2158;
+      width: min(1440px, 100%);
+      margin: 2px auto 0;
+      background: var(--navy);
       color: var(--white);
       height: 53px;
-      line-height: 53px;
       padding: 0;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 44px;
       font-weight: 700;
       letter-spacing: .04em;
@@ -132,7 +139,7 @@
     }
 
     .placeholder {
-      background: var(--bg-gray);
+      background: var(--gray);
       border: 1px solid #cfcfcf;
       border-radius: 10px;
     }
@@ -155,13 +162,15 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: var(--bg-green);
+      background: var(--green);
       border-bottom: 2px solid var(--navy);
+      min-height: 100px;
+      color: var(--white);
     }
 
     .site-header .container {
-      width: calc(100% - 20px);
-      max-width: none;
+      width: min(1440px, calc(100% - 20px));
+      max-width: 1440px;
     }
 
     .header-inner {
@@ -169,7 +178,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 14px 0;
+      height: 100px;
+      padding: 0;
     }
 
     .brand {
@@ -209,7 +219,7 @@
     }
 
     .header-nav .header-link--gray {
-      background: var(--bg-gray);
+      background: var(--gray);
       color: #000;
     }
 
@@ -227,7 +237,10 @@
       min-height: 0;
       margin-top: 2px;
       margin-bottom: 6px;
-      background: var(--bg-cream);
+      width: min(1440px, 100%);
+      min-height: 950px;
+      margin-inline: auto;
+      background: var(--cream);
       overflow: visible;
     }
 
@@ -255,7 +268,7 @@
       width: 800px;
       min-height: 950px;
       height: 950px;
-      background: #F2EBF7;
+      background: var(--pink);
       padding: 64px 48px 210px 48px;
       clip-path: polygon(0 0, 78% 0, 92% 100%, 0 100%);
       /* 右端を斜めに */
@@ -324,19 +337,58 @@
       position: absolute;
       left: 48px;
       bottom: 48px;
-      width: min(540px, calc(100% - 96px));
-      background: var(--white);
-      border: 2px solid #000;
+      width: min(620px, calc(100% - 96px));
+      background: var(--pink);
       border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
-      padding: 10px 10px 8px;
+      overflow: hidden;
     }
 
-    .quick-hours-inner {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: center;
+    .quick-hours-board {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .quick-hours .btn,
+    .hours-card .btn {
+      position: absolute;
+      z-index: 1;
+      padding: .45rem .75rem;
+      font-size: .84rem;
+      margin: 0;
+      border: 1px solid #0f1f36;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffffff 0%, #dfe8f8 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 2px 8px rgba(0, 0, 0, .18);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+      transition: transform .08s ease, box-shadow .08s ease;
+    }
+
+    .quick-hours .btn {
+      right: 30px;
+      bottom: 8px;
+    }
+
+    .hours-card .btn {
+      left: 760px;
+      top: 174px;
+      right: auto;
+      bottom: auto;
+      padding: .6rem .95rem;
+      font-size: 1rem;
+    }
+
+    .quick-hours .btn:hover,
+    .hours-card .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 3px 10px rgba(0, 0, 0, .2);
+    }
+
+    .quick-hours .btn:active,
+    .hours-card .btn:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 1px 6px rgba(0, 0, 0, .16);
     }
 
     .hours-table {
@@ -380,18 +432,15 @@
       color: #222;
     }
 
-    .quick-hours .btn {
-      padding: .4rem .65rem;
-      font-size: .84rem;
-    }
-
     /* sections */
     main {
       background: var(--navy)
     }
 
     section {
-      background: var(--white)
+      width: min(1440px, 100%);
+      margin-inline: auto;
+      background: var(--cream)
     }
 
     .section-wrap {
@@ -404,16 +453,30 @@
 
     /* hours section */
     .hours-section {
-      width: 100%;
-      height: 670px;
-      margin-inline: 0;
-      background: var(--bg-cream);
+      width: min(1440px, 100%);
+      height: 675px;
+      margin-inline: auto;
+      background: var(--cream);
       border-top: 1px solid #cfcfcf;
       border-bottom: 1px solid #cfcfcf;
+      box-shadow: inset 0 -4px 0 var(--navy);
+    }
+
+    .hours-section.section-wrap {
+      padding-bottom: 0;
     }
 
     .hours-section .section-titlebar {
-      margin: 0
+      margin-top: 2px
+    }
+
+    .hours-section .section-body {
+      height: calc(100% - 53px);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .hours-sub {
@@ -421,7 +484,7 @@
       font-weight: 700;
       color: var(--navy);
       font-size: 28px;
-      margin: 26px 0 22px;
+      margin: 0 0 22px;
     }
 
     .hours-card {
@@ -429,8 +492,9 @@
       margin: 0 auto;
       border: none;
       border-radius: 0;
-      background: var(--bg-cream);
+      background: var(--cream);
       padding: 18px;
+      position: relative;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 16px;
@@ -450,7 +514,7 @@
       grid-column: 1 / -1;
       margin: 8px 0 0;
       font-size: .9rem;
-      color: #EB1519;
+      color: var(--red);
     }
 
     .hours-board {
@@ -463,25 +527,85 @@
 
     /* news section */
     .news-section {
-      background: var(--bg-cream);
-      border-top: 1px solid #cfcfcf;
-      border-bottom: 1px solid #cfcfcf;
+      width: min(1440px, 100%);
+      height: 715px;
+      background: var(--cream);
+      border: 2px solid #b8b8b8;
+      box-shadow: inset 0 3px 8px rgba(0, 0, 0, .16), inset 0 -2px 5px rgba(255, 255, 255, .75);
       position: relative;
     }
 
     .news-section .news-pill-wrap {
       display: flex;
       justify-content: center;
-      margin-top: -18px;
+      margin-top: 0;
+      width: 100%;
+    }
+
+    .news-section .pill[aria-label="ニュース"] {
+      background: var(--dcream);
+      width: 192px;
+      height: 76px;
+      border-radius: 0;
+      padding: 0;
+      color: var(--navy);
+      font-size: 3rem;
+      line-height: 1;
+      letter-spacing: .04em;
+      border: 1px solid #b7ac9b;
+      box-shadow: inset 0 3px 7px rgba(0, 0, 0, .2), inset 0 -2px 4px rgba(255, 255, 255, .6);
+    }
+
+    .news-section .pill[aria-label="ニュース"] .news-text {
+      display: inline-block;
+      animation: news-text-pulse 1.4s ease-in-out infinite;
+    }
+
+    .news-section .news-list {
+      margin-top: 56px;
+    }
+
+    @keyframes news-text-pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.06);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .news-section .pill[aria-label="ニュース"] .news-text {
+        animation: none;
+      }
+    }
+
+    .news-content {
+      height: calc(100% - 53px - 40px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .news-list {
       width: min(860px, 100%);
-      margin: 28px auto 0;
+      margin: 20px auto 0;
       padding: 0;
       list-style: none;
       display: grid;
       gap: 12px;
+    }
+
+    .news-section .section-body {
+      padding: 0;
+      width: min(var(--container), calc(100% - 48px));
+      margin-inline: auto;
     }
 
     .news-item {
@@ -490,7 +614,7 @@
       border-radius: 10px;
       padding: 10px 14px;
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.28rem;
       display: flex;
       gap: 10px;
       align-items: center;
@@ -503,10 +627,13 @@
     }
 
     .news-footer-bar {
-      position: relative;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
       width: min(1440px, 100%);
       height: 40px;
-      margin: 18px auto 0;
+      margin: 0 auto;
       background: var(--navy);
     }
 
@@ -518,70 +645,136 @@
     }
 
     .news-more a {
-      background: var(--bg-gray);
-      border: 1px solid #000;
+      background: linear-gradient(180deg, #ffffff 0%, #dfe8f8 100%);
+      border: 1px solid #0f1f36;
       border-radius: 10px;
       padding: .4rem .8rem;
-      box-shadow: var(--shadow);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 2px 8px rgba(0, 0, 0, .18);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
       font-weight: 500;
+      transition: transform .08s ease, box-shadow .08s ease;
+    }
+
+    .news-more a:hover {
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 3px 10px rgba(0, 0, 0, .2);
+    }
+
+    .news-more a:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 1px 6px rgba(0, 0, 0, .16);
     }
 
     /* director message */
     .message-section {
       width: min(1440px, 100%);
-      height: 833px;
+      height: 880px;
       margin-inline: auto;
-      padding: 46px 0 62px;
-      background: var(--white);
+      padding: 46px 0;
+      background: var(--cream);
       border-bottom: 1px solid #e8e8e8;
+      box-shadow: inset 0 -4px 0 var(--navy);
     }
 
     .message-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 42px;
-      align-items: stretch;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .message-grid>div {
+      position: relative;
+      left: 200px;
+      top: 0;
+      width: 482px;
+      height: 650px;
     }
 
     .message-title {
-      font-size: 2.2rem;
+      font-size: 44px;
       margin: 0 0 16px;
       font-weight: 700;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, .28);
     }
 
     .message-body {
-      font-size: 1rem;
+      font-size: 18px;
       color: #222;
+      line-height: 1.7;
+    }
+
+    .message-body p {
+      margin: 0 0 14px;
+    }
+
+    .message-body p:last-child {
+      margin-bottom: 0;
     }
 
     .message-body__indent {
       text-indent: 1em;
     }
 
+    .message-body .message-intro {
+      font-size: 16px;
+    }
+
+    .message-paragraph-y {
+      margin-top: 0;
+      text-indent: 1em;
+    }
+
+    .message-line-offset {
+      display: block;
+      margin-top: 1em;
+      text-indent: 1em;
+    }
+
     .message-sign {
       margin-top: 18px;
       font-weight: 700;
-      text-align: center;
+      text-align: right;
     }
 
     .message-photo {
-      min-height: 420px;
+      position: relative;
+      top: 44px;
+      align-self: start;
+      height: 650px;
       border-radius: 10px;
+      object-fit: cover;
     }
 
     /* services */
     .services-section {
-      background: var(--bg-cream);
+      min-height: 850px;
+      background: var(--cream);
       border-top: 1px solid #cfcfcf;
       border-bottom: 1px solid #cfcfcf;
       position: relative;
       padding-bottom: 56px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .services-section .container {
+      width: min(1200px, 100%);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transform: translateY(-12px);
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .services-lead {
       margin: 18px 0 26px;
       font-weight: 700;
       text-indent: 1em;
+      color: var(--navy);
+      line-height: 1.6;
     }
 
     .services-grid {
@@ -603,7 +796,7 @@
 
     .service-media {
       height: 170px;
-      background: var(--bg-gray);
+      background: var(--gray);
       border-bottom: 1px solid #dcdcdc;
       width: 100%;
       object-fit: cover;
@@ -622,47 +815,88 @@
     }
 
     .service-text {
-      padding: 10px 14px 18px;
-      font-size: .95rem;
+      margin: 0;
+      padding: 14px 14px 18px;
+      font-size: 18px;
+      line-height: 1.75;
+      text-align: justify;
+      text-justify: inter-ideograph;
       color: #222;
       flex: 1;
       text-indent: 1em;
     }
 
+    .services-footer-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      width: min(1440px, 100%);
+      height: 36px;
+      margin: 0 auto;
+      background: var(--navy);
+      z-index: 1;
+    }
+
     .services-more {
       position: absolute;
-      right: 24px;
-      bottom: 14px;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .services-more a {
-      background: var(--bg-gray);
-      border: 1px solid #000;
+      background: linear-gradient(180deg, #ffffff 0%, #dfe8f8 100%);
+      border: 1px solid #0f1f36;
       border-radius: 10px;
-      padding: .4rem .85rem;
-      box-shadow: var(--shadow);
-      font-weight: 500;
+      padding: .32rem .85rem;
+      font-weight: 700;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 2px 8px rgba(0, 0, 0, .22);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+      transition: transform .08s ease, box-shadow .08s ease;
+    }
+
+    .services-more a:hover {
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 3px 10px rgba(0, 0, 0, .24);
+    }
+
+    .services-more a:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 1px 6px rgba(0, 0, 0, .18);
     }
 
     /* about */
     .about-section {
-      background: var(--bg-cream);
-      padding-bottom: 58px;
+      min-height: 980px;
+      background: var(--cream);
+      padding-bottom: 113px;
       border-bottom: 1px solid #e8e8e8;
+      box-shadow: inset 0 -4px 0 var(--navy);
+      position: relative;
     }
 
     .about-lead {
-      margin: 26px 0 22px;
+      margin: 113px auto 26px;
+      width: 1200px;
+      min-height: 136px;
+      max-width: 100%;
       font-weight: 700;
       text-indent: 1em;
+      color: var(--navy);
+      line-height: 1.6;
     }
 
     .slider {
-      background: var(--bg-gray);
+      background: var(--gray);
       border: 1px solid #cfcfcf;
-      height: 520px;
-      border-radius: 10px;
+      width: 1200px;
+      height: 680px;
+      margin: 44px auto 0;
+      max-width: 100%;
+      border-radius: 10px 10px 0 0;
       position: relative;
+      top: 0;
       overflow: hidden;
     }
 
@@ -676,98 +910,195 @@
       position: absolute;
       left: 0;
       right: 0;
-      bottom: 12px;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
       justify-content: center;
       gap: 14px;
+      z-index: 2;
     }
 
     .slider-controls a {
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      background: var(--bg-dark-gray);
-      border-radius: 999px;
-      border: 1px solid #cfcfcf;
-      padding: .3rem .85rem;
-      font-weight: 500;
-      box-shadow: var(--shadow);
+      justify-content: center;
+      background: linear-gradient(180deg, #ffffff 0%, #dfe8f8 100%);
+      border: 1px solid #0f1f36;
+      border-radius: 10px;
+      padding: .08rem .55rem;
+      font-size: .9rem;
+      font-weight: 700;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 3px 0 #0f1f36, 0 8px 14px rgba(0, 0, 0, .22);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+      transition: transform .08s ease, box-shadow .08s ease;
+    }
+
+    .slider-controls a:hover {
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95), 0 4px 0 #0f1f36, 0 10px 16px rgba(0, 0, 0, .24);
+    }
+
+    .slider-controls a:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 1px 0 #0f1f36, 0 4px 8px rgba(0, 0, 0, .18);
+    }
+
+    .slider-controls a[data-slider-action="next"] {
+      background: linear-gradient(180deg, #4f86ff 0%, #2358cf 100%);
+      border-color: #1b3f94;
+      color: #fff;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, .25);
     }
 
     .slider-controls a.is-disabled {
-      background: var(--bg-gray);
+      background: var(--gray);
       color: #8c8c8c;
+      box-shadow: none;
+      text-shadow: none;
+    }
+
+    .about-footer-bar {
+      position: relative;
+      top: -1px;
+      width: 1200px;
+      max-width: 100%;
+      margin: 0 auto;
+      height: 36px;
+      background: var(--navy);
+      border-radius: 0 0 10px 10px;
+      z-index: 1;
     }
 
     /* staff */
     .staff-section {
-      background: var(--bg-cream);
-      padding-bottom: 64px;
+      background: var(--cream);
+      padding-bottom: 0;
+      padding-top: 0;
+      border-bottom: 4px solid var(--navy);
+    }
+
+    .staff-section .container {
+      padding-top: 0;
+      padding-bottom: 113px;
     }
 
     .staff-lead {
-      margin: 22px 0 26px;
+      margin: 95px auto 18px;
+      width: 1200px;
+      max-width: 100%;
       color: var(--navy);
       font-weight: 700;
       text-indent: 1em;
+      line-height: 1.6;
     }
 
     .staff-list {
+      width: 1200px;
+      max-width: 100%;
+      margin: 0 auto 0;
       display: grid;
-      gap: 18px;
+      gap: 10px;
     }
 
     .staff-card {
       display: grid;
       grid-template-columns: 220px 1fr auto;
       gap: 18px;
-      align-items: center;
-      padding: 18px;
+      align-items: start;
+      padding: 12px;
+      position: relative;
+      height: 240px;
       border-radius: 12px;
       border: 1px solid #e2e2e2;
       box-shadow: var(--shadow);
       background: var(--white);
     }
 
+    .staff-card>div {
+      min-width: 0;
+      width: 100%;
+      align-self: start;
+      margin-top: 2px;
+    }
+
     .staff-photo {
-      width: 200px;
-      height: 200px;
+      width: 192px;
+      height: 192px;
       border-radius: 30px;
-      background: var(--bg-gray);
+      background: var(--gray);
       border: 1px solid #cfcfcf;
       object-fit: cover;
+      align-self: center;
+      justify-self: start;
     }
 
     .staff-name {
-      margin: 0 0 8px;
-      font-size: 1.4rem;
+      margin: 0 0 1em;
+      font-size: 28px;
       font-weight: 700;
-      color: var(--navy);
+      color: #000;
     }
 
     .staff-desc {
       margin: 0;
-      color: var(--navy);
+      width: 100%;
+      max-width: 100%;
+      color: #000;
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    .staff-card .btn {
+      position: absolute;
+      right: 12px;
+      bottom: 8px;
+      padding: .3rem .9rem;
       font-size: 1rem;
+      font-weight: 500;
+      border: 1px solid #0f1f36;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffffff 0%, #dfe8f8 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 2px 8px rgba(0, 0, 0, .18);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+      transition: transform .08s ease, box-shadow .08s ease;
+    }
+
+    .staff-card .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95), 0 3px 10px rgba(0, 0, 0, .2);
+    }
+
+    .staff-card .btn:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 1px 6px rgba(0, 0, 0, .16);
     }
 
     /* access */
     .access-section {
-      background: var(--bg-cream);
+      min-height: 1180px;
+      background: var(--cream);
+      border-top: 2px solid var(--navy);
+      margin-top: 0;
+      padding-top: 0;
       padding-bottom: 64px;
+    }
+
+    .access-section .section-titlebar {
+      margin-top: 2px;
     }
 
     .access-grid {
       display: grid;
       grid-template-columns: 1.15fr .85fr;
       gap: 12px;
-      margin-top: 40px;
+      margin-top: 142px;
       align-items: start;
     }
 
     .map-box {
-      width: 667px;
-      height: 570px;
+      width: 690px;
+      height: 590px;
+      margin-left: 73px;
       border: 2px solid #9aa7d6;
       border-radius: 0;
       max-width: 100%;
@@ -795,7 +1126,7 @@
 
     /* footer */
     footer.site-footer {
-      background: var(--bg-green);
+      background: var(--green);
       border-top: 1px solid #cfcfcf;
       color: var(--white);
     }
@@ -830,7 +1161,7 @@
     .footer-social img {
       width: 22px;
       height: 22px;
-      background: var(--bg-green);
+      background: var(--green);
       opacity: .85;
       border-radius: 4px;
       display: block;
@@ -857,7 +1188,7 @@
     .footer-banner {
       height: 140px;
       border-radius: 10px;
-      background: var(--bg-green);
+      background: var(--green);
       border: 1px solid rgba(255, 255, 255, .25);
       margin-top: 14px;
     }
@@ -868,6 +1199,26 @@
       text-align: center;
       font-size: .85rem;
       padding: 10px 0;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 44px;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: 20px;
+    }
+
+    .header-nav a {
+      font-weight: 500;
+      font-size: 18px;
     }
 
     /* responsive */
@@ -889,8 +1240,35 @@
         grid-template-columns: 1fr
       }
 
+      .message-grid>div {
+        position: static;
+        left: auto;
+        top: auto;
+        width: auto;
+        height: auto;
+      }
+
+      .message-body {
+        position: static;
+        left: auto;
+        top: auto;
+        width: auto;
+        height: auto;
+      }
+
+      .message-photo {
+        position: static;
+        top: auto;
+        height: auto;
+      }
+
       .services-grid {
         grid-template-columns: repeat(2, 1fr)
+      }
+
+      .services-section .container {
+        justify-content: flex-start;
+        transform: none;
       }
 
       .staff-card {
@@ -976,53 +1354,8 @@
           </p>
 
           <div class="quick-hours" aria-label="診療時間（クイック表示）">
-            <div class="quick-hours-inner">
-              <div>
-                <table class="hours-table" aria-label="診療時間表">
-                  <thead>
-                    <tr>
-                      <th scope="col">診療時間</th>
-                      <th scope="col">月</th>
-                      <th scope="col">火</th>
-                      <th scope="col">水</th>
-                      <th scope="col">木</th>
-                      <th scope="col">金</th>
-                      <th scope="col">土</th>
-                      <th scope="col">日</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>9時〜12時</td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                    </tr>
-                    <tr>
-                      <td>14時〜19時</td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                      <td><span class="dot" aria-label="診療あり"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                      <td><span class="dot dot--off" aria-label="休診"></span></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p class="note">
-                  受付時間：8時〜11時 / 13〜18時<br>
-                  休診日：木曜・土曜午後・日曜<br>
-                  ※祝祭日も診察を行っておりますが、休診日もございますので、事前にご確認ください。
-                </p>
-              </div>
-
-              <a class="btn" href="#" aria-label="Web予約へ">Web予約</a>
-            </div>
+            <img class="quick-hours-board" src="img/openingBoard1.png" alt="診療時間のご案内">
+            <a class="btn" href="#" aria-label="Web予約へ">Web予約</a>
           </div>
         </div>
 
@@ -1041,6 +1374,7 @@
 
         <div class="hours-card" role="group" aria-label="診療時間（詳細）">
           <img class="hours-board" src="img/openingBoard.jpg" alt="診療時間のご案内">
+          <a class="btn" href="#" aria-label="Web予約へ">Web予約</a>
         </div>
       </div>
     </section>
@@ -1049,24 +1383,25 @@
     <section id="news" class="news-section section-wrap">
       <h1 class="section-titlebar">お知らせ</h1>
 
-      <div class="news-pill-wrap">
-        <span class="pill" aria-label="ニュース">News</span>
-      </div>
+      <div class="news-content">
+        <div class="news-pill-wrap">
+          <span class="pill" aria-label="ニュース"><span class="news-text">News</span></span>
+        </div>
 
-      <div class="container section-body">
-        <ul class="news-list" aria-label="お知らせ一覧（最新5件）">
-          <li><a class="news-item" href="news/influenza-vaccine.html"><time
-                datetime="2025-01-01">YY/MM/DD</time><span>インフルエンザ予防接種について</span></a></li>
-          <li><a class="news-item" href="news/newyear-holiday.html"><time
-                datetime="2025-01-01">YY/MM/DD</time><span>年末年始の休診について</span></a></li>
-          <li><a class="news-item" href="news/health-checkup.html"><time
-                datetime="2025-01-01">YY/MM/DD</time><span>健康診断のご案内</span></a></li>
-          <li><a class="news-item" href="news/covid-measures.html"><time
-                datetime="2025-01-01">YY/MM/DD</time><span>新型コロナウイルス対策について</span></a></li>
-          <li><a class="news-item" href="news/online-care.html"><time
-                datetime="2025-01-01">YY/MM/DD</time><span>オンライン診療の導入について</span></a></li>
-        </ul>
-
+        <div class="container section-body">
+          <ul class="news-list" aria-label="お知らせ一覧（最新5件）">
+            <li><a class="news-item" href="news/influenza-vaccine.html"><time
+                  datetime="2025-01-01">YY/MM/DD</time><span>インフルエンザ予防接種について</span></a></li>
+            <li><a class="news-item" href="news/newyear-holiday.html"><time
+                  datetime="2025-01-01">YY/MM/DD</time><span>年末年始の休診について</span></a></li>
+            <li><a class="news-item" href="news/health-checkup.html"><time
+                  datetime="2025-01-01">YY/MM/DD</time><span>健康診断のご案内</span></a></li>
+            <li><a class="news-item" href="news/covid-measures.html"><time
+                  datetime="2025-01-01">YY/MM/DD</time><span>新型コロナウイルス対策について</span></a></li>
+            <li><a class="news-item" href="news/online-care.html"><time
+                  datetime="2025-01-01">YY/MM/DD</time><span>オンライン診療の導入について</span></a></li>
+          </ul>
+        </div>
       </div>
 
       <div class="news-footer-bar" aria-hidden="true">
@@ -1084,14 +1419,16 @@
             <h2 class="message-title">院長挨拶</h2>
 
             <div class="message-body">
-              <p class="message-body__indent">こんにちは。佐藤医院の院長、佐藤太郎と申します。当院のホームページをご覧いただき、ありがとうございます。</p>
+              <p class="message-body__indent message-intro">こんにちは。佐藤医院の院長、佐藤太郎と申します。<br>当院のホームページをご覧いただき、ありがとうございます。</p>
 
-              <p class="message-body__indent">
-                佐藤医院では、「地域に根ざした医療」をモットーに、患者様一人ひとりに寄り添った医療を提供することを目指しております。日常的な健康管理から生活習慣病の予防、さらには専門的な診断や治療まで、幅広い内科診療を行い、地域の皆様の健康を支える役割を担っていきたいと考えております。
+              <p class="message-body__indent message-paragraph-y">
+                佐藤医院では、「地域に根ざした医療」をモットーに、<br>患者様一人ひとりに寄り添った医療を提供することを目指しております。<span
+                  class="message-line-offset">日常的な健康管理から生活習慣病の予防、さらには専門的な診断や治療まで、幅広い内科診療を行い、地域の皆様の健康を支える役割を担っていきたいと考えております。</span>
               </p>
 
               <p class="message-body__indent">
-                私たちは、患者様の不安を少しでも軽減し、安心して診療を受けていただけるよう、わかりやすい説明と丁寧な対応を心掛けております。また、近隣の医療機関とも連携し、必要に応じて高度医療へのアクセスもサポートいたします。どんな小さな不調でも、どうぞお気軽にご相談ください。
+                私たちは、患者様の不安を少しでも軽減し、安心して診療を受けていただけるよう、わかりやすい説明と丁寧な対応を心掛けております。<span
+                  class="message-line-offset">また、近隣の医療機関とも連携し、必要に応じて高度医療へのアクセスもサポートいたします。どんな小さな不調でも、どうぞお気軽にご相談ください。</span>
               </p>
 
               <p>これからも、患者様の健康を第一に考え、地域の皆様に信頼される医療機関であり続けるため、スタッフ一同努力してまいります。どうぞよろしくお願いいたします。</p>
@@ -1110,9 +1447,9 @@
       <h1 class="section-titlebar section-titlebar--navy">診療内容</h1>
 
       <div class="container">
-        <p class="services-lead">
+        <h2 class="services-lead">
           当院では、地域の皆様の健康を支えるため、幅広い内科診療を行っております。日常的な体調管理から、各種の検査や治療に至るまで、どんなお悩みもお気軽にご相談ください。
-        </p>
+        </h2>
 
         <div class="services-grid" aria-label="診療内容（4項目）">
           <article class="service-card">
@@ -1148,6 +1485,9 @@
           </article>
         </div>
 
+      </div>
+
+      <div class="services-footer-bar" aria-hidden="true">
         <div class="services-more">
           <a href="#" aria-label="診療内容を詳しく">詳しく</a>
         </div>
@@ -1159,15 +1499,18 @@
       <h1 class="section-titlebar">当医院について</h1>
 
       <div class="container">
-        <p class="about-lead">
+        <h2 class="about-lead">
           佐藤医院は、地域の皆様の健康を守り、より良い生活をサポートすることを使命としています。創立以来、私たちは「患者様一人ひとりに寄り添った診療」を大切にし、地域密着型の医療を提供してまいりました。今後も、皆様の健康維持と病気予防に貢献するため、より良い医療サービスを提供し続けることをお約束いたします。
-        </p>
+        </h2>
 
         <div class="slider" aria-label="院内の様子（スライダー）">
           <img id="about-slider-image" src="img/Hospital_Exterior/hospital_4.jpg" alt="院内の様子 1">
+        </div>
+
+        <div class="about-footer-bar" aria-hidden="true">
           <div class="slider-controls" aria-label="スライダー操作">
-            <a href="#" data-slider-action="prev" aria-label="前の画像">前へ</a>
-            <a href="#" data-slider-action="next" aria-label="次の画像">次へ</a>
+            <a href="#" data-slider-action="prev" aria-label="前の画像">◀️ 前へ</a>
+            <a href="#" data-slider-action="next" aria-label="次の画像">次へ ▶️</a>
           </div>
         </div>
       </div>
@@ -1178,16 +1521,17 @@
       <h1 class="section-titlebar">スタッフ紹介</h1>
 
       <div class="container">
-        <p class="staff-lead">
+        <h2 class="staff-lead">
           皆様に安心してご来院いただけるよう、私たちスタッフ一同、誠心誠意対応いたします。それぞれの専門性と温かさを活かし、皆様の健康を支えるパートナーとしてお力になれるよう努めてまいります。
-        </p>
+        </h2>
 
         <div class="staff-list" aria-label="スタッフ一覧">
           <article class="staff-card">
             <img class="staff-photo" src="img/doctor_Image/sato_taro.png" alt="院長 佐藤 太郎の写真">
             <div>
-              <h3 class="staff-name">院長　佐藤 太郎</h3>
-              <p class="staff-desc">専門分野： 生活習慣病、呼吸器疾患、内科全般　患者様にとって気軽に相談できる「かかりつけ医」を目指しています。どんな小さな不安でも、まずはご相談ください。</p>
+              <h2 class="staff-name">院長　佐藤 太郎</h2>
+              <h3 class="staff-desc">専門分野： 生活習慣病、呼吸器疾患、内科全般<br>患者様にとって気軽に相談できる「かかりつけ医」を目指しています。どんな小さな不安でも、まずはご相談ください。
+              </h3>
             </div>
             <a class="btn" href="#" aria-label="院長の経歴">経歴</a>
           </article>
@@ -1195,8 +1539,9 @@
           <article class="staff-card">
             <img class="staff-photo" src="img/Doctor_Image/suzuki_mari 1.png" alt="看護部長 鈴木 真理の写真">
             <div>
-              <h3 class="staff-name">看護部長　鈴木 真理</h3>
-              <p class="staff-desc">得意分野： 親身な対応、注射・採血技術、健康管理指導　安心して治療を受けていただけるよう、いつも笑顔でお待ちしています。些細なことでもお気軽にご相談ください。</p>
+              <h2 class="staff-name">看護部長　鈴木 真理</h2>
+              <h3 class="staff-desc">得意分野： 親身な対応、注射・採血技術、健康管理指導<br>安心して治療を受けていただけるよう、いつも笑顔でお待ちしています。些細なことでもお気軽にご相談ください。
+              </h3>
             </div>
             <a class="btn" href="#" aria-label="看護部長の経歴">経歴</a>
           </article>
@@ -1204,8 +1549,9 @@
           <article class="staff-card">
             <img class="staff-photo" src="img/Doctor_Image/takahashi_yumi 1.png" alt="臨床検査技師 高橋 由美の写真">
             <div>
-              <h3 class="staff-name">臨床検査技師　高橋 由美</h3>
-              <p class="staff-desc">得意分野： 血液検査、心電図検査、超音波検査　検査は不安が伴うこともありますが、できるだけリラックスしていただけるよう、優しく丁寧な対応を心がけています。</p>
+              <h2 class="staff-name">臨床検査技師　高橋 由美</h2>
+              <h3 class="staff-desc">得意分野： 血液検査、心電図検査、超音波検査<br>検査は不安が伴うこともありますが、できるだけリラックスしていただけるよう、優しく丁寧な対応を心がけています。
+              </h3>
             </div>
             <a class="btn" href="#" aria-label="臨床検査技師の経歴">経歴</a>
           </article>
@@ -1213,8 +1559,9 @@
           <article class="staff-card">
             <img class="staff-photo" src="img/Doctor_Image/yamamoto_hana 1.png" alt="医療事務 山本 花の写真">
             <div>
-              <h3 class="staff-name">医療事務　山本 花</h3>
-              <p class="staff-desc">得意分野： 受付業務、カルテ管理、医療費計算　皆様に気持ちよくご利用いただけるよう、笑顔と真心を大切にしております。初めての方もどうぞ安心してお越しください。</p>
+              <h2 class="staff-name">医療事務　山本 花</h2>
+              <h3 class="staff-desc">得意分野： 受付業務、カルテ管理、医療費計算<br>皆様に気持ちよくご利用いただけるよう、笑顔と真心を大切にしております。初めての方もどうぞ安心してお越しください。
+              </h3>
             </div>
             <a class="btn" href="#" aria-label="医療事務の経歴">経歴</a>
           </article>
