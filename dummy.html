@@ -282,12 +282,40 @@
       color:#555;
     }
     @media (max-width: 900px){
-      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .inner{width:min(1100px,calc(100% - 24px));margin:20px auto 0}
+      .header{font-size:36px}
+      .sub-header{font-size:28px}
+      .news-head{font-size:21px;padding:12px 14px}
+      .news-date{min-width:88px;margin-right:8px}
+      .news-body{font-size:16px;padding:12px 14px 16px}
+      .services-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+      .service-card{min-height:380px}
+      .service-media{height:150px;margin-bottom:14px}
+      .service-text{font-size:16px;line-height:1.7}
       .reservation-layout{grid-template-columns:1fr}
+      .reserve-card{padding:16px 14px}
+      .reserve-grid{grid-template-columns:1fr}
+      .faq-group-title{font-size:20px}
+      .faq-qa{font-size:16px;padding:12px 14px 16px}
     }
     @media (max-width: 560px){
+      .header{font-size:28px}
+      .sub-header{font-size:22px}
+      .news-head{font-size:18px;padding:10px 12px}
+      .news-date{display:block;min-width:0;margin:0 0 4px}
+      .news-body{font-size:15px;padding:10px 12px 14px;line-height:1.7}
       .services-grid{grid-template-columns:1fr}
-      .reserve-grid{grid-template-columns:1fr}
+      .service-card{min-height:auto}
+      .service-media{height:170px}
+      .service-title{font-size:.98rem}
+      .service-text{font-size:15px;line-height:1.7}
+      .reserve-guide h3{font-size:18px}
+      .reserve-help,.reserve-label,.reserve-check{font-size:13px}
+      .reserve-input,.reserve-select,.reserve-textarea{font-size:14px;padding:10px}
+      .reserve-submit{min-height:44px;font-size:15px}
+      .faq-intro,.faq-qa{font-size:15px}
+      .faq-group-title{font-size:18px}
+      .news-more{right:10px;padding:0 10px;height:30px;font-size:13px}
     }
     .news-head{
       margin:0;

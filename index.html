@@ -1458,6 +1458,62 @@
 
     /* responsive */
     @media (max-width: 980px) {
+      header.site-header {
+        position: static;
+        min-height: auto;
+      }
+
+      .header-inner {
+        height: auto;
+        padding: 10px 0 12px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand {
+        min-width: 0;
+      }
+
+      .brand-mark {
+        width: min(240px, 62vw);
+        height: auto;
+      }
+
+      .header-nav {
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+      }
+
+      .header-nav a {
+        font-size: 14px;
+        padding: .28rem .45rem;
+      }
+
+      .header-actions {
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+      }
+
+      .hero,
+      .hours-section,
+      .news-section,
+      .message-section,
+      .services-section,
+      .about-section {
+        min-height: auto;
+      }
+
+      .hero-bg,
+      .hero-grid,
+      .hero-left,
+      .hero-right {
+        height: auto;
+        min-height: auto;
+      }
+
       .hero-grid {
         grid-template-columns: 1fr
       }
@@ -1506,9 +1562,33 @@
         transform: none;
       }
 
+      .about-lead,
+      .staff-lead {
+        margin: 40px auto 18px;
+      }
+
+      .slider {
+        margin-top: 24px;
+        height: min(56vw, 420px);
+      }
+
+      .about-footer-bar {
+        height: 36px;
+      }
+
       .staff-card {
         grid-template-columns: 1fr;
-        text-align: left
+        text-align: left;
+        height: auto;
+        min-height: 220px;
+      }
+
+      .staff-name {
+        font-size: 24px;
+      }
+
+      .staff-desc {
+        font-size: 18px;
       }
 
       .staff-photo {
@@ -1517,30 +1597,118 @@
         border-radius: 18px
       }
 
+      .access-section .container {
+        padding-top: 52px;
+        padding-bottom: 52px;
+      }
+
       .access-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
+        width: 100%;
       }
 
       .map-box {
-        height: 320px
+        width: 100%;
+        height: min(60vw, 380px);
+      }
+
+      .access-panel {
+        width: 100%;
       }
 
       .footer-main {
         grid-template-columns: 1fr
       }
+
+      .footer-brand {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        margin-left: 0;
+      }
+
+      .footer-banner {
+        width: 100%;
+        margin-top: 8px;
+      }
+
+      .footer-banner .btn {
+        transform: translate(-50%, 74%);
+      }
+
+      .footer-banner .btn:hover {
+        transform: translate(-50%, calc(74% - 1px));
+      }
+
+      .footer-banner .btn:active {
+        transform: translate(-50%, calc(74% + 2px));
+      }
     }
 
     @media (max-width: 560px) {
+      .header-inner {
+        padding: 8px 0 10px;
+      }
+
+      .header-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .header-nav a {
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .header-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .header-actions .btn {
+        font-size: .86rem;
+        padding: .42rem .65rem;
+      }
+
       .services-grid {
         grid-template-columns: 1fr
       }
 
       .hero h1 {
-        font-size: 2.4rem
+        font-size: 2rem
       }
 
       .section-titlebar {
-        font-size: 1.7rem
+        font-size: 1.55rem
+      }
+
+      .services-lead,
+      .about-lead,
+      .staff-lead,
+      .service-text,
+      .message-body p,
+      .access-panel h3 {
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .staff-name {
+        font-size: 20px;
+      }
+
+      .slider-controls a {
+        font-size: .78rem;
+      }
+
+      .footer-social img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .footer-bottom {
+        font-size: .78rem;
       }
     }
   </style>
