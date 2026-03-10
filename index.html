@@ -1711,6 +1711,71 @@
         font-size: .78rem;
       }
     }
+
+    @media (max-width: 430px) {
+      .container {
+        width: min(var(--container), calc(100% - 20px));
+      }
+
+      .header-nav {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left {
+        padding: 26px 14px 140px;
+      }
+
+      .hero h1 {
+        font-size: 1.78rem;
+      }
+
+      .hero .lead,
+      .services-lead,
+      .about-lead,
+      .staff-lead,
+      .service-text,
+      .message-body p,
+      .access-panel h3 {
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .section-titlebar {
+        font-size: 1.4rem;
+        letter-spacing: .02em;
+      }
+
+      .services-footer-bar,
+      .about-footer-bar {
+        height: 34px;
+      }
+
+      .staff-photo {
+        height: 190px;
+      }
+
+      .slider {
+        height: 54vw;
+      }
+
+      .slider-controls {
+        gap: 8px;
+      }
+
+      .slider-controls a {
+        padding: .06rem .46rem;
+        font-size: .72rem;
+      }
+
+      .map-box {
+        height: 260px;
+      }
+
+      .footer-banner .btn {
+        font-size: .9rem;
+        padding: .4rem .75rem;
+      }
+    }
   </style>
 </head>
 
