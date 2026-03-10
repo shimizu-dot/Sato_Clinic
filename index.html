@@ -2052,6 +2052,7 @@
       let isSliding = false;
       let currentStart = 0;
       let servicesPromise;
+      let preloadPromise;
 
       function toServiceData(card) {
         const image = card.querySelector('.service-media');
@@ -2107,6 +2108,7 @@
       }
 
       function loadServices() {
+        if (preloadPromise) return preloadPromise;
         if (servicesPromise) return servicesPromise;
 
         const topItems = Array.from(
@@ -2179,7 +2181,56 @@
             return topItems.concat(localExtraItems);
           });
 
-        return servicesPromise;
+        preloadPromise = servicesPromise.then(function (items) {
+          const imageTasks = items.map(function (item) {
+            return new Promise(function (resolve) {
+              if (!item || !item.imageSrc) {
+                resolve();
+                return;
+              }
+              const img = new Image();
+              img.onload = resolve;
+              img.onerror = resolve;
+              img.src = item.imageSrc;
+            });
+          });
+          return Promise.all(imageTasks).then(function () {
+            return items;
+          });
+        }).catch(function () {
+          return servicesPromise;
+        });
+
+        return preloadPromise;
+      }
+
+      function runSlideAnimation(currentPanel, nextPanel, done) {
+        const duration = 460;
+        const easing = 'ease';
+
+        if (typeof currentPanel.animate === 'function' && typeof nextPanel.animate === 'function') {
+          const outAnim = currentPanel.animate(
+            [{ transform: 'translateX(0)' }, { transform: 'translateX(-100%)' }],
+            { duration: duration, easing: easing, fill: 'forwards' }
+          );
+          const inAnim = nextPanel.animate(
+            [{ transform: 'translateX(100%)' }, { transform: 'translateX(0)' }],
+            { duration: duration, easing: easing, fill: 'forwards' }
+          );
+          Promise.all([
+            outAnim.finished.catch(function () { }),
+            inAnim.finished.catch(function () { })
+          ]).then(done);
+          return;
+        }
+
+        currentPanel.style.transition = 'transform 0.46s ease';
+        nextPanel.style.transition = 'transform 0.46s ease';
+        requestAnimationFrame(function () {
+          currentPanel.style.transform = 'translateX(-100%)';
+          nextPanel.style.transform = 'translateX(0)';
+        });
+        setTimeout(done, 520);
       }
 
       trigger.addEventListener('click', function (event) {
@@ -2201,29 +2252,25 @@
           const nextPanel = buildPanel(nextItems);
           gridWrap.appendChild(nextPanel);
 
-          requestAnimationFrame(function () {
-            activePanel.style.transform = 'translateX(-100%)';
-            nextPanel.style.transform = 'translateX(0)';
-          });
-
-          let settled = false;
-          function finalizeSlide() {
-            if (settled) return;
-            settled = true;
+          runSlideAnimation(activePanel, nextPanel, function () {
             activePanel.remove();
             nextPanel.classList.remove('is-next');
             nextPanel.classList.add('is-current');
+            nextPanel.style.transition = '';
             nextPanel.style.transform = 'translateX(0)';
             activePanel = nextPanel;
             currentStart = nextStart;
             isSliding = false;
             trigger.removeAttribute('aria-disabled');
-          }
-
-          nextPanel.addEventListener('transitionend', finalizeSlide, { once: true });
-          setTimeout(finalizeSlide, 550);
+          });
+        }).catch(function () {
+          isSliding = false;
+          trigger.removeAttribute('aria-disabled');
         });
       });
+
+      // Warm up data + images so the first click does not flicker.
+      loadServices();
     })();
   </script>
 </body>
