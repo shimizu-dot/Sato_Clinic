@@ -1602,8 +1602,11 @@
 
       .staff-photo {
         width: 100%;
-        height: 220px;
-        border-radius: 18px
+        height: auto;
+        max-height: 360px;
+        border-radius: 18px;
+        object-fit: contain;
+        background: #f4f4f4;
       }
 
       .access-section .container {
@@ -1764,7 +1767,8 @@
       }
 
       .staff-photo {
-        height: 190px;
+        height: auto;
+        max-height: 320px;
       }
 
       .slider {
