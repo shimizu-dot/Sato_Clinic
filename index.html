@@ -879,12 +879,15 @@
     .services-grid-wrap {
       position: relative;
       overflow: hidden;
+      isolation: isolate;
     }
 
     .services-grid--panel {
       width: 100%;
       transition: transform .45s ease;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     .services-grid--panel.is-current {
@@ -896,7 +899,7 @@
       position: absolute;
       inset: 0;
       z-index: 2;
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
     }
 
     .service-card {
@@ -1405,7 +1408,7 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 2px 8px rgba(0, 0, 0, .18);
       text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
       transition: transform .08s ease, box-shadow .08s ease;
-      transform: translate(calc(-50% + 20rem - 2px), 74%);
+      transform: translate(calc(-50% + 20rem - 3px), calc(74% + 1px));
     }
 
     .footer-banner .btn:hover {
@@ -2054,6 +2057,13 @@
       let servicesPromise;
       let preloadPromise;
 
+      function syncWrapHeight(panel) {
+        const h = panel.getBoundingClientRect().height;
+        if (h > 0) {
+          gridWrap.style.minHeight = h + 'px';
+        }
+      }
+
       function toServiceData(card) {
         const image = card.querySelector('.service-media');
         const title = card.querySelector('.service-title');
@@ -2210,11 +2220,11 @@
 
         if (typeof currentPanel.animate === 'function' && typeof nextPanel.animate === 'function') {
           const outAnim = currentPanel.animate(
-            [{ transform: 'translateX(0)' }, { transform: 'translateX(-100%)' }],
+            [{ transform: 'translate3d(0,0,0)' }, { transform: 'translate3d(-100%,0,0)' }],
             { duration: duration, easing: easing, fill: 'forwards' }
           );
           const inAnim = nextPanel.animate(
-            [{ transform: 'translateX(100%)' }, { transform: 'translateX(0)' }],
+            [{ transform: 'translate3d(100%,0,0)' }, { transform: 'translate3d(0,0,0)' }],
             { duration: duration, easing: easing, fill: 'forwards' }
           );
           Promise.all([
@@ -2227,8 +2237,8 @@
         currentPanel.style.transition = 'transform 0.46s ease';
         nextPanel.style.transition = 'transform 0.46s ease';
         requestAnimationFrame(function () {
-          currentPanel.style.transform = 'translateX(-100%)';
-          nextPanel.style.transform = 'translateX(0)';
+          currentPanel.style.transform = 'translate3d(-100%, 0, 0)';
+          nextPanel.style.transform = 'translate3d(0, 0, 0)';
         });
         setTimeout(done, 520);
       }
@@ -2276,13 +2286,15 @@
           gridWrap.appendChild(nextPanel);
 
           preparePanelImages(nextPanel).then(function () {
+            syncWrapHeight(activePanel);
             runSlideAnimation(activePanel, nextPanel, function () {
               activePanel.remove();
               nextPanel.classList.remove('is-next');
               nextPanel.classList.add('is-current');
               nextPanel.style.transition = '';
-              nextPanel.style.transform = 'translateX(0)';
+              nextPanel.style.transform = 'translate3d(0, 0, 0)';
               activePanel = nextPanel;
+              syncWrapHeight(activePanel);
               currentStart = nextStart;
               isSliding = false;
               trigger.removeAttribute('aria-disabled');
@@ -2299,6 +2311,7 @@
 
       // Warm up data + images so the first click does not flicker.
       loadServices();
+      syncWrapHeight(activePanel);
     })();
   </script>
 </body>
