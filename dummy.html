@@ -29,7 +29,9 @@
     .section-top-band{height:4px;background:var(--navy)}
     .header{
       height:53px;
-      background:var(--navy);
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 45%),
+        linear-gradient(90deg,#0f1f35 0%,#1f3a5f 42%,#2f5d8e 100%);
       color:var(--white);
       display:flex;
       align-items:center;
@@ -37,14 +39,19 @@
       font-size:44px;
       font-weight:700;
       line-height:1;
-      text-shadow:0 4px 4px rgba(0,0,0,.25);
+      text-shadow:0 3px 8px rgba(0,0,0,.35);
       margin-top:4px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 6px 18px rgba(13,27,45,.24);
     }
     .inner{width:min(1100px,calc(100% - 40px));margin:32px auto 0}
     .content-section{margin:0 0 28px}
     .sub-header{
       height:53px;
-      background:linear-gradient(90deg,#163152 0%, #1F3A5F 45%, #2E578A 100%);
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 44%),
+        linear-gradient(90deg,#10243f 0%, #1f3a5f 46%, #2f6094 100%);
       color:var(--white);
       display:flex;
       align-items:center;
@@ -52,8 +59,29 @@
       font-size:36px;
       font-weight:700;
       line-height:1;
-      text-shadow:0 4px 4px rgba(0,0,0,.25);
+      text-shadow:0 3px 8px rgba(0,0,0,.34);
       margin:0 0 18px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.32), 0 4px 14px rgba(13,27,45,.18);
+    }
+    .header::after,
+    .sub-header::after{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-30%;
+      width:30%;
+      height:100%;
+      background:linear-gradient(110deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.45) 52%,rgba(255,255,255,0) 100%);
+      filter:blur(.3px);
+      animation:titleShine 3.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes titleShine{
+      0%{left:-32%;}
+      56%{left:112%;}
+      100%{left:112%;}
     }
     details.news-item{
       background:var(--white);
@@ -89,13 +117,13 @@
       background-repeat:no-repeat;
     }
     .services-grid .service-card:nth-child(1) .service-media{
-      background-image:url('img/Patient_Image/patient_1.jpg');
+      background-image:url('img/Infomation_Image/information_1.jpg');
     }
     .services-grid .service-card:nth-child(2) .service-media{
-      background-image:url('img/Patient_Image/patient_5.jpg');
+      background-image:url('img/Infomation_Image/information_2.jpg');
     }
     .services-grid .service-card:nth-child(3) .service-media{
-      background-image:url('img/Patient_Image/patient_7.jpg');
+      background-image:url('img/Infomation_Image/information_3.jpg');
     }
     .service-title{
       margin:10px 16px 0;
@@ -554,5 +582,24 @@
       <a class="news-more" href="#top">お知らせ一覧へ</a>
     </div>
   </div>
+  <script>
+    (() => {
+      const mediaEls = document.querySelectorAll("#services-section .service-media");
+      if (!mediaEls.length) return;
+
+      const pool = [
+        "img/Infomation_Image/information_1.jpg",
+        "img/Infomation_Image/information_2.jpg",
+        "img/Infomation_Image/information_3.jpg",
+        "img/Infomation_Image/information_4.jpg",
+      ];
+
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      mediaEls.forEach((el, index) => {
+        const path = shuffled[index % shuffled.length];
+        el.style.backgroundImage = `url('${path}')`;
+      });
+    })();
+  </script>
 </body>
 </html>
