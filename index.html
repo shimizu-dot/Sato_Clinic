@@ -2233,6 +2233,29 @@
         setTimeout(done, 520);
       }
 
+      function preparePanelImages(panel) {
+        const images = Array.from(panel.querySelectorAll('img'));
+        const tasks = images.map(function (img) {
+          if (img.complete) {
+            if (typeof img.decode === 'function') {
+              return img.decode().catch(function () { });
+            }
+            return Promise.resolve();
+          }
+          return new Promise(function (resolve) {
+            img.onload = function () {
+              if (typeof img.decode === 'function') {
+                img.decode().catch(function () { }).finally(resolve);
+                return;
+              }
+              resolve();
+            };
+            img.onerror = resolve;
+          });
+        });
+        return Promise.all(tasks);
+      }
+
       trigger.addEventListener('click', function (event) {
         event.preventDefault();
         if (isSliding) return;
@@ -2252,14 +2275,19 @@
           const nextPanel = buildPanel(nextItems);
           gridWrap.appendChild(nextPanel);
 
-          runSlideAnimation(activePanel, nextPanel, function () {
-            activePanel.remove();
-            nextPanel.classList.remove('is-next');
-            nextPanel.classList.add('is-current');
-            nextPanel.style.transition = '';
-            nextPanel.style.transform = 'translateX(0)';
-            activePanel = nextPanel;
-            currentStart = nextStart;
+          preparePanelImages(nextPanel).then(function () {
+            runSlideAnimation(activePanel, nextPanel, function () {
+              activePanel.remove();
+              nextPanel.classList.remove('is-next');
+              nextPanel.classList.add('is-current');
+              nextPanel.style.transition = '';
+              nextPanel.style.transform = 'translateX(0)';
+              activePanel = nextPanel;
+              currentStart = nextStart;
+              isSliding = false;
+              trigger.removeAttribute('aria-disabled');
+            });
+          }).catch(function () {
             isSliding = false;
             trigger.removeAttribute('aria-disabled');
           });
