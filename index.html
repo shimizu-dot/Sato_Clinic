@@ -2056,6 +2056,19 @@
       let currentStart = 0;
       let servicesPromise;
       let preloadPromise;
+      let assetsReady = false;
+
+      function setTriggerEnabled(enabled) {
+        if (enabled) {
+          trigger.removeAttribute('aria-disabled');
+          trigger.style.pointerEvents = '';
+          trigger.style.opacity = '';
+          return;
+        }
+        trigger.setAttribute('aria-disabled', 'true');
+        trigger.style.pointerEvents = 'none';
+        trigger.style.opacity = '.65';
+      }
 
       function syncWrapHeight(panel) {
         const h = panel.getBoundingClientRect().height;
@@ -2268,6 +2281,7 @@
 
       trigger.addEventListener('click', function (event) {
         event.preventDefault();
+        if (!assetsReady) return;
         if (isSliding) return;
 
         isSliding = true;
@@ -2310,7 +2324,14 @@
       });
 
       // Warm up data + images so the first click does not flicker.
-      loadServices();
+      setTriggerEnabled(false);
+      loadServices().then(function () {
+        assetsReady = true;
+        setTriggerEnabled(true);
+      }).catch(function () {
+        assetsReady = true;
+        setTriggerEnabled(true);
+      });
       syncWrapHeight(activePanel);
     })();
   </script>
