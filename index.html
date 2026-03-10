@@ -2142,16 +2142,20 @@
           })
           .then(function (html) {
             const doc = new DOMParser().parseFromString(html, 'text/html');
+            const extraSelectors = [
+              '#services-section #service-05',
+              '#services-section #service-06',
+              '#services-section #service-07'
+            ];
             const fallbackImages = [
               'img/Infomation_Image/information_1.jpg',
               'img/Infomation_Image/information_2.jpg',
-              'img/Infomation_Image/information_3.jpg',
-              'img/Infomation_Image/information_4.jpg'
+              'img/Infomation_Image/information_3.jpg'
             ];
 
-            const extraItems = Array.from(
-              doc.querySelectorAll('#services-section .service-card')
-            ).map(function (card, index) {
+            const extraItems = extraSelectors.map(function (selector, index) {
+              const card = doc.querySelector(selector);
+              if (!card) return null;
               const titleNode = card.querySelector('.service-title');
               const textNode = card.querySelector('.service-text');
               const title = titleNode ? titleNode.textContent.trim() : '';
@@ -2163,11 +2167,11 @@
                 text: text
               };
             }).filter(function (item) {
-              return item.title && item.text;
+              return Boolean(item && item.title && item.text);
             });
 
             if (extraItems.length >= 3) {
-              return topItems.concat(extraItems);
+              return topItems.concat(extraItems.slice(0, 3));
             }
             return topItems.concat(localExtraItems);
           })
@@ -2202,7 +2206,10 @@
             nextPanel.style.transform = 'translateX(0)';
           });
 
-          nextPanel.addEventListener('transitionend', function () {
+          let settled = false;
+          function finalizeSlide() {
+            if (settled) return;
+            settled = true;
             activePanel.remove();
             nextPanel.classList.remove('is-next');
             nextPanel.classList.add('is-current');
@@ -2211,7 +2218,10 @@
             currentStart = nextStart;
             isSliding = false;
             trigger.removeAttribute('aria-disabled');
-          }, { once: true });
+          }
+
+          nextPanel.addEventListener('transitionend', finalizeSlide, { once: true });
+          setTimeout(finalizeSlide, 550);
         });
       });
     })();
