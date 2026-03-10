@@ -146,7 +146,9 @@
     .section-titlebar {
       width: min(1440px, 100%);
       margin: 2px auto 0;
-      background: linear-gradient(100deg, #102845 0%, #1f3a5f 46%, #2b5c93 100%);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .32) 0%, rgba(255, 255, 255, 0) 45%),
+        linear-gradient(90deg, #0f1f35 0%, #1f3a5f 42%, #2f5d8e 100%);
       color: var(--white);
       height: 53px;
       padding: 0;
@@ -158,11 +160,41 @@
       letter-spacing: .04em;
       border-top: 1px solid rgba(255, 255, 255, .2);
       border-bottom: 1px solid rgba(0, 0, 0, .25);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), inset 0 -1px 0 rgba(0, 0, 0, .18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 6px 18px rgba(13, 27, 45, .24);
+      text-shadow: 0 3px 8px rgba(0, 0, 0, .35);
+      position: relative;
+      overflow: hidden;
     }
 
     .section-titlebar--navy {
-      background: linear-gradient(100deg, #102845 0%, #1f3a5f 46%, #2b5c93 100%)
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .28) 0%, rgba(255, 255, 255, 0) 44%),
+        linear-gradient(100deg, #10243f 0%, #1f3a5f 46%, #2f6094 100%);
+    }
+
+    .section-titlebar::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -42%;
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(110deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .68) 52%, rgba(255, 255, 255, 0) 100%);
+      filter: blur(.15px);
+      transform: translateX(0);
+      animation: titleShine 2.2s linear infinite;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    @keyframes titleShine {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(360%);
+      }
     }
 
     .placeholder {
@@ -1514,19 +1546,19 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="top.html#top" aria-label="佐藤医院 トップ">
+      <a class="brand" href="#top" aria-label="佐藤医院 トップ">
         <img class="brand-mark" src="img/Logo/logo.png" alt="佐藤医院ロゴ">
         <span class="sr-only">佐藤医院</span>
       </a>
 
       <nav class="header-nav" aria-label="グローバルナビゲーション">
-        <a class="header-link--gray" href="top.html#about">当院について</a>
-        <a href="top.html#news">お知らせ</a>
-        <a href="top.html#services">診療内容</a>
-        <a href="top.html#staff">スタッフ紹介</a>
-        <a href="top.html#hours">診療時間</a>
-        <a href="top.html#access">所在地</a>
-        <a href="top.html#contact">お問合せ</a>
+        <a class="header-link--gray" href="#about">当院について</a>
+        <a href="#news">お知らせ</a>
+        <a href="#services">診療内容</a>
+        <a href="#staff">スタッフ紹介</a>
+        <a href="#hours">診療時間</a>
+        <a href="#access">所在地</a>
+        <a href="#contact">お問合せ</a>
 
         <span class="header-actions">
           <a class="btn btn--gray" href="dummy.html#reservation-section" aria-label="Web予約">Web予約</a>
@@ -1822,6 +1854,7 @@
               <a href="#services">診療内容</a>
               <a href="#staff">スタッフ紹介</a>
               <a href="#access">アクセス</a>
+              <a href="#contact">お問合せ</a>
               <a href="dummy.html#faq-section" aria-label="FAQページへ">FAQ</a>
             </nav>
           </div>
